@@ -19,10 +19,10 @@ def MulMAJ(a, b, c):
     return cicr
 
 
-def judge_carry(a, b, c, carry):
+def judge_carry(a, b, c, carry_in):
     cicr = QCircuit()
     n = len(a)
     cicr.insert(MulMAJ(a, b, c))
-    cicr.insert(CNOT(a[n - 1], carry))
+    cicr.insert(CNOT(a[n - 1], carry_in))
     cicr.insert(MulMAJ(a, b, c).dagger())
     return cicr

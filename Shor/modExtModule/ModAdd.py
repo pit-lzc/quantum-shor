@@ -41,8 +41,8 @@ def mod_add(x, N, qa, qb, qi):
     cicr.insert(add_cicr_notCarryIn)
 
     # 若进位成功，此时控制比特为0，进位失败则为1，之后考虑一段线路，使进位失败时的控制比特恢复为0，进位成功时控制比特不受影响
-    # 进位成功后的 qb = x+y-N，0<=y<=N，因此y<N，y-N<0，qb < x --- qb - x < 0
-    # 进位失败后的 qb = x+y，0<=y<=N，qb > x --- qb - x > 0
+    # 进位成功后的 qb = x+y-N，其中0<=y<N，因此y<N，y-N<0，qb < x --- qb - x < 0
+    # 进位失败后的 qb = x+y，其中0<=y<N，qb > x --- qb - x > 0
     # 因此类比上面，以 qb+2^n-x 作为区分，再次通过进位器。
     handled_value_2 = (1 << n) - x
     cicr.insert(transform_data(qa, handled_value_2))

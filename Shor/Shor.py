@@ -31,7 +31,7 @@ def shor(N: int, times: int):
         if gcd(a, N) != 1:
             print('FAIL: gcd(a, N) != 1,retry')
             continue
-        c = shor_quantum(a, N, times)
+        c, cicr_cost, run_cost, measure_cost = shor_quantum(a, N, times)
         print('c:', c)
         r = get_r(c, N, times)
         print('r:', r)
@@ -48,11 +48,13 @@ def shor(N: int, times: int):
             print('FAIL: A == 1 or A == N，retry')
             continue
         result = {A, B}
-        print(result)
-        print('----------SUCCESS----------')
         end_time = int(time.time() * 1000)
+        total_cost = end_time - start_time
         # 生成对应量子结果
         # get_excel_value_times(c, a, N)
         # 生成Shor不同次数消耗时间
-        get_excel_costTime_Shor(start_time, end_time, times)
+        print("total cost: " + str(total_cost))
+        print("result: " + str(result))
+        print('----------SUCCESS----------')
+        get_excel_costTime_Shor(times, cicr_cost, run_cost, measure_cost, total_cost)
         return result
